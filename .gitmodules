@@ -1,0 +1,12 @@
+[submodule "cookbooks/apt"]
+	path = cookbooks/apt
+	url = https://github.com/opscode-cookbooks/apt.git
+[submodule "cookbooks/databag-node-params"]
+	path = cookbooks/databag-node-params
+	url = git@github.com:kainwinterheart/databag-node-params.git
+[submodule "cookbooks/mongodb"]
+	path = cookbooks/mongodb
+	url = git@github.com:kainwinterheart/chef-mongodb.git
+[submodule "cookbooks/chef-solo-search"]
+	path = cookbooks/chef-solo-search
+	url = git@github.com:kainwinterheart/chef-solo-search.git
