@@ -6,6 +6,7 @@
   "automatic": {
   },
   "normal": {
+	"fqdn": "testMDB1",
   	"mongodb": {
 		"cluster_name": "testMDB",
 		"replicaset_name": "testMDB",
