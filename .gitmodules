@@ -10,3 +10,9 @@
 [submodule "cookbooks/chef-solo-search"]
 	path = cookbooks/chef-solo-search
 	url = git@github.com:kainwinterheart/chef-solo-search.git
+[submodule "cookbooks/hostsfile"]
+	path = cookbooks/hostsfile
+	url = https://github.com/customink-webops/hostsfile.git
+[submodule "cookbooks/hostsfile-attrs"]
+	path = cookbooks/hostsfile-attrs
+	url = git@github.com:kainwinterheart/hostsfile-attrs.git
