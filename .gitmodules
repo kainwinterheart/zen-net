@@ -19,3 +19,6 @@
 [submodule "cookbooks/perl"]
 	path = cookbooks/perl
 	url = https://github.com/kainwinterheart/chef-cookbook-perl.git
+[submodule "cookbooks/openssl"]
+	path = cookbooks/openssl
+	url = https://github.com/opscode-cookbooks/openssl.git
