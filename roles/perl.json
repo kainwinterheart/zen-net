@@ -1,0 +1,10 @@
+{
+    "name": "perl",
+    "description": "perl node",
+    "chef_type": "role",
+    "json_class": "Chef::Role",
+    "run_list": [
+        "recipe[perl]",
+        "recipe[perl::modules]"
+    ]
+}

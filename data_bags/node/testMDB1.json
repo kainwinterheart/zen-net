@@ -1,24 +1,25 @@
 {
-  "id": "testMDB1",
-  "name": "testMDB1",
-  "chef_environment": "_default",
-  "json_class": "Chef::Node",
-  "automatic": {
-  },
-  "normal": {
-	"fqdn": "testMDB1",
-  	"mongodb": {
-		"cluster_name": "testMDB",
-		"replicaset_name": "testMDB",
-		"is_replicaset": true,
-		"shard_name": "default"
-	}
-  },
-  "chef_type": "node",
-  "default": {
-  },
-  "override": {
-  },
-  "run_list": [
-  ]
+    "id": "testMDB1",
+    "name": "testMDB1",
+    "chef_environment": "_default",
+    "json_class": "Chef::Node",
+    "automatic": {
+    },
+    "normal": {
+        "fqdn": "testMDB1",
+        "perl": {
+            "modules": [
+                { "name": "Mojolicious" },
+                { "name": "Plack" },
+                { "name": "Starman" }
+            ]
+        }
+    },
+    "chef_type": "node",
+    "default": {
+    },
+    "override": {
+    },
+    "run_list": [
+    ]
 }

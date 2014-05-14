@@ -1,0 +1,12 @@
+{
+    "name": "common",
+    "description": "common role",
+    "chef_type": "role",
+    "json_class": "Chef::Role",
+    "run_list": [
+        "recipe[chef-solo-search]",
+        "recipe[databag-node-params]",
+        "recipe[apt]",
+        "recipe[hostsfile-attrs]"
+    ]
+}
