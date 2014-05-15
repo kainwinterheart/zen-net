@@ -22,3 +22,9 @@
 [submodule "cookbooks/openssl"]
 	path = cookbooks/openssl
 	url = https://github.com/opscode-cookbooks/openssl.git
+[submodule "cookbooks/build-essential"]
+	path = cookbooks/build-essential
+	url = https://github.com/opscode-cookbooks/build-essential.git
+[submodule "cookbooks/package-attrs"]
+	path = cookbooks/package-attrs
+	url = https://github.com/kainwinterheart/package-attrs.git
