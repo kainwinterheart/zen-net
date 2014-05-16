@@ -13,6 +13,36 @@
                 { "name": "Plack" },
                 { "name": "Starman" }
             ]
+        },
+        "nginx-simple": {
+            "upstream": {
+                "zenNet": [
+                    [ "server", "127.0.0.1:5000" ]
+                ]
+            },
+            "server": [
+                {
+                    "name": "testMDB1",
+                    "port": 80,
+                    "locations": [
+                        {
+                            "name": "/",
+                            "attrs": [
+                                [ "proxy_pass", "http://zenNet" ],
+                                [ "proxy_http_version", 1.1 ],
+                                [ "proxy_set_header", "Upgrade", "$http_upgrade" ],
+                                [ "proxy_set_header", "Connection", "\"upgrade\"" ],
+                                [ "proxy_set_header", "Host", "$host" ],
+                                [ "proxy_set_header", "X-Forwarded-For", "$proxy_add_x_forwarded_for" ],
+                                [ "proxy_set_header", "X-Forwarded-Proto", "\"http\"" ]
+                            ]
+                        }
+                    ],
+                    "attrs": [
+                        [ "index", "index.html" ]
+                    ]
+                }
+            ]
         }
     },
     "chef_type": "node",

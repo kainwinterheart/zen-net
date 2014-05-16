@@ -32,6 +32,8 @@ Vagrant.configure("2") do |config|
             chef.add_role "mongodb"
             chef.add_role "perl"
 
+            chef.add_recipe "nginx-simple"
+
             chef.json = {
                 "hostsfile-attrs" => hostsfile_attrs
             }

@@ -28,3 +28,6 @@
 [submodule "cookbooks/package-attrs"]
 	path = cookbooks/package-attrs
 	url = https://github.com/kainwinterheart/package-attrs.git
+[submodule "cookbooks/nginx-simple"]
+	path = cookbooks/nginx-simple
+	url = https://github.com/kainwinterheart/nginx-simple.git

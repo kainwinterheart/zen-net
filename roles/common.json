@@ -7,6 +7,7 @@
         "recipe[chef-solo-search]",
         "recipe[databag-node-params]",
         "recipe[apt]",
-        "recipe[hostsfile-attrs]"
+        "recipe[hostsfile-attrs]",
+        "recipe[package-attrs]"
     ]
 }
