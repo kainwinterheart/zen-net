@@ -11,7 +11,8 @@
             "modules": [
                 { "name": "Mojolicious" },
                 { "name": "Plack" },
-                { "name": "Starman" }
+                { "name": "Starman" },
+                { "name": "Mojolicious::Plugin::Mongodb" }
             ]
         },
         "nginx-simple": {
