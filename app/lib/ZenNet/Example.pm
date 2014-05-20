@@ -7,8 +7,11 @@ sub welcome {
 
     my ( $self ) = @_;
 
+    my $xml = $self -> new_xml( 'root' => 'asd' );
+
+    $self -> render_xml( $xml );
     # Render template "example/welcome.html.ep" with message
-    $self -> render( msg => 'Welcome to the Mojolicious real-time web framework!' );
+    # $self -> render( msg => 'Welcome to the Mojolicious real-time web framework!' );
 }
 
 sub post {

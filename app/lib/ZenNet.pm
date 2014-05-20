@@ -2,21 +2,36 @@ package ZenNet;
 
 use Mojo::Base 'Mojolicious';
 
+use ZenNet::Initializers::Config ();
+use ZenNet::Initializers::Router ();
+use ZenNet::Initializers::Plugins ();
+
+use Cwd ();
+use File::Spec ();
+use File::Basename ();
+
 # This method will run once at server start
 sub startup {
 
     my ( $self ) = @_;
 
-    $self -> plugin( 'mongodb' => {
-        host => 'mongodb://127.0.0.1:27017'
-    } );
+    my $root = Cwd::realpath( File::Spec -> catfile(
+        File::Basename::dirname( $INC{ 'ZenNet.pm' } ),
+        File::Spec -> updir()
+    ) );
 
-    # Router
-    my $r = $self -> routes();
+    $self -> helper( root => sub{ $root } );
 
-    # Normal route to controller
-    $r -> get( '/' ) -> to( 'example#welcome' );
-    $r -> post( '/' ) -> to( 'example#post' );
+    ZenNet::Initializers::Config -> main( $self );
+
+    ZenNet::Initializers::Plugins -> main(
+        sub{ return $self -> cget( @_ ) },
+        sub{ return $self -> plugin( @_ ) }
+    );
+
+    ZenNet::Initializers::Router -> main( $self -> routes() );
+
+    return;
 }
 
 1;
