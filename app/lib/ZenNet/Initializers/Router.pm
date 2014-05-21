@@ -10,22 +10,22 @@ sub main {
     $r -> get( '/' ) -> to( 'example#welcome' );
     $r -> post( '/' ) -> to( 'example#post' );
 
-    $r -> get( '/srp/register/salt' ) -> to(
+    $r -> post( '/srp/register/salt' ) -> to(
         controller => 'SRP::Register',
         action => 'salt'
     );
 
-    $r -> get( '/srp/register/user' ) -> to(
+    $r -> post( '/srp/register/user' ) -> to(
         controller => 'SRP::Register',
         action => 'user'
     );
 
-    $r -> get( '/srp/handshake' ) -> to(
+    $r -> post( '/srp/handshake' ) -> to(
         controller => 'SRP::Authenticate',
         action => 'handshake'
     );
 
-    $r -> get( '/srp/authenticate' ) -> to(
+    $r -> post( '/srp/authenticate' ) -> to(
         controller => 'SRP::Authenticate',
         action => 'authenticate'
     );

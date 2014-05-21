@@ -7,7 +7,9 @@ sub welcome {
 
     my ( $self ) = @_;
 
-    my $xml = $self -> new_xml( 'root' => 'asd' );
+    my $uid = $self -> session( 'uid' );
+
+    my $xml = $self -> new_xml( 'root' => $uid );
 
     $self -> render_xml( $xml );
     # Render template "example/welcome.html.ep" with message

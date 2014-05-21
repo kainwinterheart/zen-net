@@ -19,9 +19,8 @@ function SRP_REGISTER()
             if(xhr.responseXML.getElementsByTagName("salt").length > 0)
             {
                 var s = that.innerxml(xhr.responseXML.getElementsByTagName("salt")[0]);
-                var x = that.calcX(s);
-                var v = that.getg().modPow(x, that.getN());
-                that.register_send_verifier(v.toString(16));
+
+                that.register_send_verifier( that.getClient().calculateV( s ).toString( 16 ) );
             }
             else if(xhr.responseXML.getElementsByTagName("error").length > 0)
             {
@@ -47,6 +46,6 @@ function SRP_REGISTER()
 	            that.identify();
             }
         }
-    };  
+    };
 };
 SRP_REGISTER();

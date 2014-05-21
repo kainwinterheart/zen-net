@@ -6,7 +6,7 @@ use ZenNet::SRP::Utils ();
 
 use Email::Valid ();
 
-use Encode 'decode_utf8';
+use Encode 'decode_utf8';;
 
 
 sub handshake {
@@ -82,6 +82,10 @@ sub authenticate {
 
         return $self -> error( 'Invalid request' );
     }
+
+    delete $self -> session() -> { 'srp_token' };
+
+    $self -> session( uid => $user -> { '_id' } -> value() );
 
     my $M2 = $srp -> server_compute_M2();
 

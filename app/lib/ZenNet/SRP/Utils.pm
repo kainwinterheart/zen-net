@@ -8,14 +8,14 @@ use Crypt::SRP ();
 
 sub client {
 
-    return Crypt::SRP -> new( 'RFC5054-1024bit', 'SHA1' );
+    return Crypt::SRP -> new( 'RFC5054-1024bit', 'SHA1', 'hex' );
 }
 
 sub salt {
 
     my ( $self, $size ) = @_;
 
-    return unpack( 'H*', $self -> client() -> random_bytes( ( defined( $size ) ? $size : () ) ) );
+    return $self -> client() -> random_bytes( ( defined( $size ) ? $size : () ) );
 }
 
 
