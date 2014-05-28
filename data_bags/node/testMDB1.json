@@ -15,7 +15,6 @@
                 { "name": "Mojolicious::Plugin::Mongodb" },
                 { "name": "YAML" },
                 { "name": "Mojolicious::Plugin::YamlConfig" },
-                { "name": "Mojolicious::Plugin::XML::Loy" },
                 { "name": "Crypt::SRP" },
                 { "name": "Math::BigInt::GMP", "deps": { "packages": [
                     { "name": "libgmp10" },

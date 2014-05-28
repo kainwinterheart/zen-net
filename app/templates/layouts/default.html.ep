@@ -3,6 +3,7 @@
   <head>
     <title>Autumn Coffee</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/loading-bar.css" />
 
     <script type="text/javascript" src="/js/ng/angular.min.js"></script>
     <script type="text/javascript" src="/js/ng/angular-route.min.js"></script>
