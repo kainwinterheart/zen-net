@@ -7,8 +7,8 @@ sub main {
 
     my ( $self, $r ) = @_;
 
-    $r -> get( '/' ) -> to( 'example#welcome' );
-    $r -> post( '/' ) -> to( 'example#post' );
+    $r -> get( '/' ) -> to( 'index#index' );
+    $r -> post( '/' ) -> to( 'index#post' );
 
     $r -> post( '/srp/register/salt' ) -> to(
         controller => 'SRP::Register',

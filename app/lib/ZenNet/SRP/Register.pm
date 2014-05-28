@@ -49,7 +49,7 @@ sub salt {
     $self -> session( srp_login => $login );
     $self -> session( srp_salt => $salt );
 
-    return $self -> render_xml( $self -> new_xml( salt => $salt ) );
+    return $self -> render( json => { salt => $salt } );
 }
 
 sub user {
@@ -89,16 +89,14 @@ sub user {
     delete $self -> session() -> { 'srp_login' };
     delete $self -> session() -> { 'srp_salt' };
 
-    return $self -> render_xml( $self -> new_xml( 'ok' ) );
+    return $self -> render( json => {} );
 }
 
 sub error {
 
     my ( $self, $msg ) = @_;
 
-    my $xml = $self -> new_xml( error => $msg );
-
-    return $self -> render_xml( $xml );
+    return $self -> render( json => { error => $msg } );
 }
 
 1;

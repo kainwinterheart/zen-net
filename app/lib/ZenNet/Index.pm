@@ -1,19 +1,13 @@
-package ZenNet::Example;
+package ZenNet::Index;
 
 use Mojo::Base 'Mojolicious::Controller';
 
 # This action will render a template
-sub welcome {
+sub index {
 
     my ( $self ) = @_;
 
-    my $uid = $self -> session( 'uid' );
-
-    my $xml = $self -> new_xml( 'root' => $uid );
-
-    $self -> render_xml( $xml );
-    # Render template "example/welcome.html.ep" with message
-    # $self -> render( msg => 'Welcome to the Mojolicious real-time web framework!' );
+    return $self -> render();
 }
 
 sub post {

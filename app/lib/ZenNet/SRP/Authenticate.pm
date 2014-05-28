@@ -46,12 +46,10 @@ sub handshake {
 
     $self -> session( srp_token => [ $login, $A, $B, $b ] );
 
-    return $self -> render_xml( $self -> new_xml(
-        r => {
-            s => $user -> { 'salt' },
-            B => $B,
-        }
-    ) );
+    return $self -> render( json => {
+        s => $user -> { 'salt' },
+        B => $B,
+    } );
 }
 
 sub authenticate {
@@ -89,16 +87,14 @@ sub authenticate {
 
     my $M2 = $srp -> server_compute_M2();
 
-    return $self -> render_xml( $self -> new_xml( M => $M2 ) );
+    return $self -> render( json => { M => $M2 } );
 }
 
 sub error {
 
     my ( $self, $msg ) = @_;
 
-    my $xml = $self -> new_xml( error => $msg );
-
-    return $self -> render_xml( $xml );
+    return $self -> render( json => { error => $msg } );
 }
 
 1;
