@@ -8,6 +8,7 @@
     <script type="text/javascript" src="/js/ng/angular.min.js"></script>
     <script type="text/javascript" src="/js/ng/angular-route.min.js"></script>
     <script type="text/javascript" src="/js/ng/loading-bar.js"></script>
+    <script type="text/javascript" src="/js/ng/ui-bootstrap-tpls-0.11.0.min.js"></script>
 
     <script type="text/javascript" src="/js/srp/jsbn.js"></script>
     <script type="text/javascript" src="/js/srp/jsbn2.js"></script>
@@ -24,7 +25,15 @@
   </head>
   <body>
 
-    <div ng-app="zenNet">
+    <nav class="navbar navbar-inverse" style="border-radius:0px;" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="#/" class="navbar-brand">Autumn Coffee</a>
+            </div>
+        </div>
+    </nav>
+
+    <div ng-app="zenNet" class="container">
         <div ng-view></div>
     </div>
 
