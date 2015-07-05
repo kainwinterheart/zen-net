@@ -8,7 +8,7 @@ use Crypt::SRP ();
 
 sub client {
 
-    return Crypt::SRP -> new( 'RFC5054-1024bit', 'SHA1', 'hex' );
+    return Crypt::SRP -> new( 'RFC5054-4096bit', 'SHA1', 'hex' );
 }
 
 sub salt {

@@ -1,12 +1,12 @@
 package ZenNet::SRP::Register;
 
-use Mojo::Base 'Mojolicious::Controller';
+use Mojo::Base 'ZenNet::BaseController';
 
 use ZenNet::SRP::Utils ();
 
-use Email::Valid ();
-
 use Encode 'decode_utf8';
+use DateTime ();
+use Email::Valid ();
 
 
 sub salt {
@@ -39,11 +39,17 @@ sub salt {
 
         $salt = ZenNet::SRP::Utils -> salt();
 
-        $model -> insert( {
-                email => $login,
-                salt => $salt,
-                created => time(),
-        }, { safe => 1 } );
+        my $now = DateTime -> now();
+        my $pid_model = $self -> model( 'blog.pageid' );
+        my $pid = $pid_model -> insert( { time => $now } ) -> value();
+
+        my $id = $model -> insert( {
+            email => $login,
+            salt => $salt,
+            created => $now,
+            blog_pageid => $pid,
+
+        }, { safe => 1 } ) -> value();
     }
 
     $self -> session( srp_login => $login );
@@ -90,13 +96,6 @@ sub user {
     delete $self -> session() -> { 'srp_salt' };
 
     return $self -> render( json => {} );
-}
-
-sub error {
-
-    my ( $self, $msg ) = @_;
-
-    return $self -> render( json => { error => $msg } );
 }
 
 1;

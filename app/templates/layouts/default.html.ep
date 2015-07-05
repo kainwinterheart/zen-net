@@ -2,13 +2,24 @@
 <html>
   <head>
     <title>Autumn Coffee</title>
+    <link href="/js/google-code-prettify/prettify.css" rel="stylesheet" />
+    <link href="/css/xeditable.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/css/loading-bar.css" />
+    <link rel="stylesheet" type="text/css" href="/css/ngTagEditor.css" />
+    <link rel="stylesheet" type="text/css" href="/css/app.css" />
 
     <script type="text/javascript" src="/js/ng/angular.min.js"></script>
     <script type="text/javascript" src="/js/ng/angular-route.min.js"></script>
+    <script type="text/javascript" src="/js/ng/xeditable.min.js"></script>
+    <script type="text/javascript" src="/js/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript" src="/js/google-code-prettify/run_prettify.js"></script>
+    <script type="text/javascript" src="/js/showdown.js"></script>
+    <script type="text/javascript" src="/js/showdown-table.js"></script>
+    <script type="text/javascript" src="/js/showdown-prettify.js"></script>
     <script type="text/javascript" src="/js/ng/loading-bar.js"></script>
     <script type="text/javascript" src="/js/ng/ui-bootstrap-tpls-0.11.0.min.js"></script>
+    <script type="text/javascript" src="/js/ng/ngTagEditor.js"></script>
 
     <script type="text/javascript" src="/js/srp/jsbn.js"></script>
     <script type="text/javascript" src="/js/srp/jsbn2.js"></script>
@@ -20,6 +31,8 @@
     <script type="text/javascript" src="/js/srp/ng/srp-auth.js"></script>
     <script type="text/javascript" src="/js/srp/ng/srp-register.js"></script>
     <script type="text/javascript" src="/js/srp/ng/app.js"></script>
+
+    <script type="text/javascript" src="/js/blog/ng/app.js"></script>
 
     <script type="text/javascript" src="/js/app.js"></script>
   </head>
@@ -36,6 +49,9 @@
     <div ng-app="zenNet" class="container">
         <div ng-view></div>
     </div>
+
+    <br />
+    <br />
 
   </body>
 </html>

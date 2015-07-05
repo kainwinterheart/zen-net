@@ -1,6 +1,6 @@
 package ZenNet::Index;
 
-use Mojo::Base 'Mojolicious::Controller';
+use Mojo::Base 'ZenNet::BaseController';
 
 # This action will render a template
 sub index {

@@ -1,6 +1,6 @@
 angular.module( 'zenNetSRPApp', [ 'zenNetSRPAuth', 'zenNetSRPRegister' ] )
 
-.constant( 'SRPBits', 1024 )
+.constant( 'SRPBits', 4096 )
 
 .factory( 'SRPAuthMethod', function( SRPAuthService ) {
 

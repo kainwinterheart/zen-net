@@ -1,0 +1,22 @@
+<div class="center-block" style="width:98%;">
+    <button type="button" class="btn btn-success" ng-click="new_post()">New post</button>
+    <br />
+    <br />
+    <div class="blog-post" ng-repeat="post in posts">
+        <p>
+            <a href="#/blog/p/{{ post.id }}" class="post-ref">&gt;&nbsp;{{ post.id }}</a>
+            <a href="#/blog/e/{{ post.id }}" class="post-action btn btn-info btn-xs" ng-show="post.can_edit">edit</a>
+        </p>
+        <div class="post-text" ng-bind-html="post.text | markdown"></div>
+        <p class="post-tags">
+            <span class="post-tag" ng-repeat="tag in post.tags">{{ tag }}</span>
+        </p>
+        <p>
+            <span>&copy; {{ post.updated }}</span>
+            <a href="#/blog/u/{{ post.blog }}">/u/{{ post.blog }}</a>
+        </p>
+        <br />
+    </div>
+    <button ng-show="next_page_from" type="button" class="btn btn-default" ng-click="next_page()">Load more</button>
+    <button ng-show="only_this_blog" type="button" class="btn btn-default" ng-click="back_to_all()">Clean filter</button>
+</div>

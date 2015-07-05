@@ -8,7 +8,6 @@ sub main {
     my ( $self, $r ) = @_;
 
     $r -> get( '/' ) -> to( 'index#index' );
-    $r -> post( '/' ) -> to( 'index#post' );
 
     $r -> post( '/srp/register/salt' ) -> to(
         controller => 'SRP::Register',
@@ -28,6 +27,31 @@ sub main {
     $r -> post( '/srp/authenticate' ) -> to(
         controller => 'SRP::Authenticate',
         action => 'authenticate'
+    );
+
+    $r -> get( '/blog' ) -> to(
+        controller => 'Blog::Page',
+        action => 'list'
+    );
+
+    $r -> get( '/blog/u/:page' ) -> to(
+        controller => 'Blog::Page',
+        action => 'list'
+    );
+
+    $r -> get( '/blog/p/:id' ) -> to(
+        controller => 'Blog::Post',
+        action => 'open'
+    );
+
+    $r -> post( '/blog/e/:id' ) -> to(
+        controller => 'Blog::Post',
+        action => 'edit'
+    );
+
+    $r -> post( '/blog/new' ) -> to(
+        controller => 'Blog::Post',
+        action => 'create'
     );
 
     return;

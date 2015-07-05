@@ -1,0 +1,15 @@
+<div class="blog-post">
+    <p>
+        <span class="post-ref">&gt;&nbsp;{{ post.id }}</span>
+        <a href="#/blog/e/{{ post.id }}" class="post-action btn btn-info btn-xs" ng-show="post.can_edit">edit</a>
+    </p>
+    <div class="post-text" ng-bind-html="post.text | markdown"></div>
+    <p class="post-tags">
+        <span class="post-tag" ng-repeat="tag in post.tags">{{ tag }}</span>
+    </p>
+    <p>
+        <span>&copy; {{ post.updated }}</span>
+        <a href="#/blog/u/{{ post.blog }}">/u/{{ post.blog }}</a>
+    </p>
+    <br />
+</div>

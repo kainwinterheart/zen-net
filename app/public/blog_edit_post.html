@@ -1,0 +1,9 @@
+<div class="blog-post">
+    <p ng-show="post.id">&gt;&nbsp;{{ post.id }}</p>
+    <div editable-textarea="post.text" ng-bind-html="post.text | markdown"></div>
+    <tag-editor ng-model="tags" output="name"></tag-editor>
+    <button type="button" class="btn btn-default" ng-click="save()">Save</button>
+    <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+    </div>
+    <br />
+</div>

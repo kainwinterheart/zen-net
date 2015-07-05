@@ -1,6 +1,6 @@
 package ZenNet::SRP::Authenticate;
 
-use Mojo::Base 'Mojolicious::Controller';
+use Mojo::Base 'ZenNet::BaseController';
 
 use ZenNet::SRP::Utils ();
 
