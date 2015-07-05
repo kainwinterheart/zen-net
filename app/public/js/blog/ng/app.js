@@ -167,7 +167,7 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
 
     $scope.tags = [];
     $scope.post = {
-        text: 'Click here to write some text'
+        text: "Demo\n====\n\nClick here to edit content\n\nCode sample\n---\n\n```\nint main()\n{\n\treturn 0;\n}\n```\n\nTable sample\n---\n\n| head 1 | head 2 |\n| === | === |\n| text 1 | text 2 |\n\nStuff\n---\n\n* **bold**\n* *italic*\n* [URL](http://autumncoffee.com/)\n\nNumbered list\n---\n\n1. first\n2. second\n3. third\n"
     };
 
     $scope.save = function() {
