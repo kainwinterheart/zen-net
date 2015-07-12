@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="zenNet">
   <head>
     <title>Autumn Coffee</title>
     <link href="/js/google-code-prettify/prettify.css" rel="stylesheet" />
@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/css/loading-bar.css" />
     <link rel="stylesheet" type="text/css" href="/css/ngTagEditor.css" />
+    <link rel="stylesheet" type="text/css" href="/css/angular-ui-notification.min.css">
     <link rel="stylesheet" type="text/css" href="/css/app.css" />
 
     <script type="text/javascript" src="/js/ng/angular.min.js"></script>
@@ -20,6 +21,7 @@
     <script type="text/javascript" src="/js/ng/loading-bar.js"></script>
     <script type="text/javascript" src="/js/ng/ui-bootstrap-tpls-0.11.0.min.js"></script>
     <script type="text/javascript" src="/js/ng/ngTagEditor.js"></script>
+    <script type="text/javascript" src="/js/ng/angular-ui-notification.min.js"></script>
 
     <script type="text/javascript" src="/js/srp/jsbn.js"></script>
     <script type="text/javascript" src="/js/srp/jsbn2.js"></script>
@@ -34,19 +36,33 @@
 
     <script type="text/javascript" src="/js/blog/ng/app.js"></script>
 
+    <script type="text/javascript" src="/js/global_state.js"></script>
+
     <script type="text/javascript" src="/js/app.js"></script>
   </head>
   <body>
 
     <nav class="navbar navbar-inverse" style="border-radius:0px;" role="navigation">
-        <div class="container-fluid">
+        <div ng-controller="AppHeader" class="container-fluid">
             <div class="navbar-header">
                 <a href="#/" class="navbar-brand">Autumn Coffee</a>
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <a href="#/blog/new" ng-show="is_in_blog && gs.logged_in" class="btn btn-success navbar-btn">New post</a>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/blog">Blogs</a></li>
+                    <li ng-hide="gs.logged_in"><a href="#/register">Register</a></li>
+                    <li ng-hide="gs.logged_in"><a href="#/login">Login</a></li>
+                    <li ng-show="gs.logged_in"><a href="/logout">Logout</a></li>
+                </ul>
             </div>
         </div>
     </nav>
 
-    <div ng-app="zenNet" class="container">
+    <div class="container">
         <div ng-view></div>
     </div>
 

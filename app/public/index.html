@@ -1,5 +1,5 @@
-<div class="center-block" style="width:250px;">
-    <a href="#/register" class="btn btn-success" role="button">Register</a>
-    <a href="#/login" class="btn btn-primary" role="button">Login</a>
-    <a href="#/blog" class="btn btn-default" role="button">Blogs</a>
+<div class="center-block">
+    <h2>Here's some topics</h2>
+
+    <a href="#/blog/t/{{ tag | for_url }}" class="index-tag" ng-repeat="tag in tags">{{ tag }}</a>
 </div>

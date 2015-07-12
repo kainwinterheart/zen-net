@@ -32,7 +32,7 @@ sub create {
         return $self -> error( 'Text is too big' );
     }
 
-    my @tags = grep( { $_ ne '' } map( { $_ =~ s/^\s+|\s+$//g; lc( decode_utf8( $_ ) ) }
+    my @tags = grep( { $_ ne '' } map( { $_ =~ s/^\s+|\s+$|\///g; lc( decode_utf8( $_ ) ) }
         @{ $self -> req() -> every_param( 'tag' ) // [] } ) );
 
     if( bytes::length( join( '', @tags ) ) > MAX_TAGS_SIZE ) {
@@ -79,7 +79,7 @@ sub edit {
         return $self -> error( 'Text is too big' );
     }
 
-    my @tags = grep( { $_ ne '' } map( { $_ =~ s/^\s+|\s+$//g; lc( decode_utf8( $_ ) ) }
+    my @tags = grep( { $_ ne '' } map( { $_ =~ s/^\s+|\s+$|\///g; lc( decode_utf8( $_ ) ) }
         @{ $self -> req() -> every_param( 'tag' ) // [] } ) );
 
     if( bytes::length( join( '', @tags ) ) > MAX_TAGS_SIZE ) {
@@ -158,6 +158,7 @@ sub open {
         updated => ( $updated -> ymd( '-' ) . ' ' . $updated -> hms( ':' ) ),
         blog => $user -> { 'blog_pageid' },
         can_edit => ( $uid eq $post -> { 'uid' } ),
+        logged_in => !! $uid,
     } );
 }
 

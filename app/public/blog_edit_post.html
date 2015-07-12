@@ -1,9 +1,13 @@
 <div class="blog-post">
-    <p ng-show="post.id">&gt;&nbsp;{{ post.id }}</p>
-    <div editable-textarea="post.text" ng-bind-html="post.text | markdown"></div>
-    <tag-editor ng-model="tags" output="name"></tag-editor>
-    <button type="button" class="btn btn-default" ng-click="save()">Save</button>
-    <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+    <div class="panel panel-default">
+        <div ng-show="post.id" class="panel-heading">&gt;&nbsp;{{ post.id }}</div>
+        <div class="panel-body">
+            <div onhide="prettyPrint()" editable-textarea="post.text" ng-bind-html="post.text | markdown"></div>
+            <tag-editor ng-model="tags" output="name"></tag-editor>
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-default" ng-click="save()">Save</button>
+            <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+        </div>
     </div>
-    <br />
 </div>

@@ -1,8 +1,8 @@
-angular.module( 'zenNetSRPApp', [ 'zenNetSRPAuth', 'zenNetSRPRegister' ] )
+angular.module( 'zenNetSRPApp', [ 'zenNetSRPAuth', 'zenNetSRPRegister', 'zenNetGlobalState', 'ui-notification' ] )
 
 .constant( 'SRPBits', 4096 )
 
-.factory( 'SRPAuthMethod', function( SRPAuthService ) {
+.factory( 'SRPAuthMethod', function( SRPAuthService, GlobalState, $location, Notification ) {
 
     return function() {
 
@@ -11,18 +11,19 @@ angular.module( 'zenNetSRPApp', [ 'zenNetSRPAuth', 'zenNetSRPRegister' ] )
             .then(
                 function() {
 
-                    alert( 'auth ok' );
+                    GlobalState.logged_in = 1;
+                    $location.path( '/' );
                 },
                 function( str ) {
 
-                    alert( 'auth: ' + str );
+                    Notification.error( str );
                 }
             )
         ;
     };
 } )
 
-.factory( 'SRPRegisterMethod', function( SRPAuthMethod, SRPRegisterService ) {
+.factory( 'SRPRegisterMethod', function( SRPAuthMethod, SRPRegisterService, Notification ) {
 
     return function() {
 
@@ -37,7 +38,7 @@ angular.module( 'zenNetSRPApp', [ 'zenNetSRPAuth', 'zenNetSRPRegister' ] )
                 },
                 function( str ) {
 
-                    alert( 'register: ' + str );
+                    Notification.error( str );
                 }
             )
         ;

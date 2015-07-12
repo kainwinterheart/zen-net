@@ -1,4 +1,4 @@
-angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTagEditor' ] )
+angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTagEditor', 'zenNetGlobalState', 'ui-notification' ] )
 
 .run( function( editableOptions )
 {
@@ -30,72 +30,91 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
     };
 } )
 
-.controller( 'BlogPageController', function( $scope, $routeParams, $http, $location ) {
+.controller( 'BlogPageController', function( $scope, $routeParams, $http, $location, GlobalState, Notification, $timeout ) {
 
     $scope.posts = [];
     $scope.next_page_from = undefined;
     $scope.only_this_blog = undefined;
+    $scope.only_this_tag = undefined;
 
     $http( {
         method: 'GET',
-        url: '/blog' + ( $routeParams.page ? '/u/' + encodeURIComponent( $routeParams.page ) : '' ),
+        url: '/blog' +
+            ( $routeParams.page ? '/u/' + encodeURIComponent( $routeParams.page ) : '' ) +
+            ( $routeParams.tag ? '/t/' + encodeURIComponent( $routeParams.tag ) : '' )
     } )
         .success( function( data ) {
 
-            $scope.posts = data.posts;
+            $scope.posts = data.posts.map( function( el ) { return transform_post( el ) } );
             $scope.next_page_from = data.next_page_from;
             $scope.only_this_blog = data.only_this_blog;
+            $scope.only_this_tag = data.only_this_tag;
+            GlobalState.logged_in = data.logged_in;
+
+            $timeout( window.prettyPrint, 150 );
         } )
         .error( function() {
 
-            alert( 'Internal error' );
+            Notification.error( 'Internal error' );
         } )
     ;
-
-    $scope.new_post = function() {
-
-        $location.path( '/blog/new' );
-    };
 
     $scope.next_page = function() {
 
         $http( {
             method: 'GET',
-            url: '/blog' + ( $routeParams.page ? '/u/' + encodeURIComponent( $routeParams.page ) : '' ),
+            url: '/blog' +
+                ( $routeParams.page ? '/u/' + encodeURIComponent( $routeParams.page ) : '' ) +
+                ( $routeParams.tag ? '/t/' + encodeURIComponent( $routeParams.tag ) : '' ),
             params: {
                 from: $scope.next_page_from
             }
         } )
             .success( function( data ) {
 
-                var list = $scope.posts;
-
                 while( data.posts.length > 0 ) {
 
-                    list.push( data.posts.shift() );
+                    $scope.posts.push( transform_post( data.posts.shift() ) );
                 }
 
                 $scope.next_page_from = data.next_page_from;
+                GlobalState.logged_in = data.logged_in;
+
+                $timeout( window.prettyPrint, 150 );
             } )
             .error( function() {
 
-                alert( 'Internal error' );
+                Notification.error( 'Internal error' );
             } )
         ;
     };
 
     $scope.back_to_all = function() {
 
-        if( $scope.only_this_blog !== undefined ) {
+        if( ( $scope.only_this_blog !== undefined ) || ( $scope.only_this_tag !== undefined ) ) {
 
             $location.path( '/blog' );
         }
     };
+
+    function transform_post( post ) {
+
+        if( post.trimmed ) {
+
+            post.text += '...';
+        }
+
+        return post;
+    }
 } )
 
-.controller( 'BlogOpenPostController', function( $scope, $routeParams, $http ) {
+.controller( 'BlogOpenPostController', function( $scope, $routeParams, $http, GlobalState, Notification, $timeout ) {
 
     $scope.post = {};
+    $scope.prettyPrint = function() {
+
+        $timeout( window.prettyPrint, 150 );
+    };
 
     $http( {
         method: 'GET',
@@ -103,16 +122,26 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
     } )
         .success( function( data ) {
 
+            GlobalState.logged_in = data.logged_in;
+            delete data[ 'logged_in' ];
+
             $scope.post = data;
+            $scope.prettyPrint();
         } )
         .error( function() {
 
-            alert( 'Internal error' );
+            Notification.error( 'Internal error' );
         } )
     ;
 } )
 
-.controller( 'BlogEditPostController', function( $scope, $routeParams, $controller, $location, BlogBuildParams, $http ) {
+.controller( 'BlogEditPostController', function( $scope, $routeParams, $controller, $location, BlogBuildParams, $http, GlobalState, Notification, $timeout ) {
+
+    if( ! GlobalState.logged_in ) {
+
+        $location.path( '/' );
+        return;
+    }
 
     $scope.tags = [];
     $scope.$watch( 'post.tags', function( list ) {
@@ -122,7 +151,13 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
         } );
     } );
 
-    $controller( 'BlogOpenPostController', { '$scope' : $scope, '$routeParams': $routeParams, '$http': $http } );
+    $controller( 'BlogOpenPostController', {
+        '$scope' : $scope,
+        '$routeParams': $routeParams,
+        '$http': $http,
+        'GlobalState': GlobalState,
+        '$timeout': $timeout
+    } );
 
     $scope.save = function() {
 
@@ -143,7 +178,7 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
 
                 if( data.error ) {
 
-                    alert( data.error );
+                    Notification.error( data.error );
 
                 } else {
 
@@ -152,7 +187,7 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
             } )
             .error( function() {
 
-                alert( 'Internal error' );
+                Notification.error( 'Internal error' );
             } )
         ;
     };
@@ -163,7 +198,13 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
     };
 } )
 
-.controller( 'BlogNewPostController', function( $scope, $location, BlogBuildParams, $http ) {
+.controller( 'BlogNewPostController', function( $scope, $location, BlogBuildParams, $http, Notification, GlobalState, $timeout ) {
+
+    if( ! GlobalState.logged_in ) {
+
+        $location.path( '/' );
+        return;
+    }
 
     $scope.tags = [];
     $scope.post = {
@@ -187,7 +228,7 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
 
                 if( data.error ) {
 
-                    alert( data.error );
+                    Notification.error( data.error );
 
                 } else {
 
@@ -196,7 +237,7 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
             } )
             .error( function() {
 
-                alert( 'Internal error' );
+                Notification.error( 'Internal error' );
             } )
         ;
     };
@@ -205,10 +246,17 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
 
         $location.path( '/blog' );
     };
+
+    $scope.prettyPrint = function() {
+
+        $timeout( window.prettyPrint, 150 );
+    };
+
+    $scope.prettyPrint();
 } )
 
-.filter( 'markdown', function ( $sce )
-{
+.filter( 'markdown', function( $sce ) {
+
     var converter = new Showdown.converter({
         extensions: [
             'table',
@@ -216,8 +264,8 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
         ]
     });
 
-    return function ( value )
-    {
+    return function( value ) {
+
         var html = converter.makeHtml( ( value || '' ).replace( />/g, '&gt;' ).replace( /</g, '&lt;' ) );
 
         return $sce.trustAsHtml( html );

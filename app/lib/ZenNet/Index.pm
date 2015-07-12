@@ -2,6 +2,11 @@ package ZenNet::Index;
 
 use Mojo::Base 'ZenNet::BaseController';
 
+use constant {
+
+    TAGS_ON_PAGE => 100,
+};
+
 # This action will render a template
 sub index {
 
@@ -10,17 +15,28 @@ sub index {
     return $self -> render();
 }
 
-sub post {
+sub real_index {
 
     my ( $self ) = @_;
 
-    my $json = $self -> req() -> json();
+    my @list = $self -> model( 'tags.tags' ) -> find( {
+        c => { '$gt' => 0 },
 
-    my $id = $self -> model( 'test.test' ) -> insert(
-        { text => $json -> { 'text' } }, { safe => 1 }
-    );
+    } ) -> sort( { c => -1 } ) -> limit( TAGS_ON_PAGE ) -> all();
 
-    $self -> render( json => { id => $id -> value() } );
+    return $self -> render( json => {
+        tags => [ map( { $_ -> { '_id' } } @list ) ],
+        logged_in => !! $self -> session( 'uid' ),
+    } );
+}
+
+sub logout {
+
+    my ( $self ) = @_;
+
+    delete( $self -> session() -> { 'uid' } );
+
+    return $self -> redirect_to( '/' );
 }
 
 1;
