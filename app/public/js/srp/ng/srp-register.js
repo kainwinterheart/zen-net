@@ -13,10 +13,11 @@ angular.module( 'zenNetSRPRegister', [ 'zenNetSRPInternals', 'zenNetSRPClient' ]
     var post = SRPInternalHTTP.post;
 
     return {
-        salt: function( I ) {
+        salt: function( I, invite ) {
 
             return post( SRPRegisterAPIURLs.salt, {
-                'I': I
+                'I': I,
+                'invite': invite
             } );
         },
         user: function( v ) {
@@ -30,9 +31,9 @@ angular.module( 'zenNetSRPRegister', [ 'zenNetSRPInternals', 'zenNetSRPClient' ]
 
 .factory( 'SRPRegisterService', function( SRPRegisterAPI, SRPClient, $q ) {
 
-    var salt = function( I ) {
+    var salt = function( I, invite ) {
 
-        return SRPRegisterAPI.salt( I );
+        return SRPRegisterAPI.salt( I, invite );
     };
 
     var user = function( v ) {
@@ -40,13 +41,13 @@ angular.module( 'zenNetSRPRegister', [ 'zenNetSRPInternals', 'zenNetSRPClient' ]
         return SRPRegisterAPI.user( v );
     };
 
-    return function( I, p, bits ) {
+    return function( I, p, bits, invite ) {
 
         var srp = SRPClient( I, p, bits );
 
         var deferred = $q.defer();
 
-        salt( I )
+        salt( I, invite )
             .success( function( data ) {
 
                 if( data.error ) return deferred.reject( data.error );

@@ -12,6 +12,14 @@ use Email::Valid ();
 sub salt {
 
     my ( $self ) = @_;
+    my $invite = $self -> model( 'users.invites' ) -> find_one( {
+        _id => lc( decode_utf8( $self -> param( 'invite' ) ) ),
+    } );
+
+    unless( defined $invite ) {
+
+        return $self -> error( 'Invalid invitation code' );
+    }
 
     my $login = lc( decode_utf8( $self -> param( 'I' ) ) );
 
@@ -25,7 +33,10 @@ sub salt {
 
     if( defined( my $user = $model -> find_one( { email => $login } ) ) ) {
 
-        if( exists $user -> { 'verifier' } ) {
+        if(
+            exists $user -> { 'verifier' }
+            || ( $user -> { 'invite' } ne $invite -> { '_id' } )
+        ) {
 
             return $self -> error( 'Login is already taken' );
 
@@ -43,13 +54,14 @@ sub salt {
         my $pid_model = $self -> model( 'blog.pageid' );
         my $pid = $pid_model -> insert( { time => $now } ) -> value();
 
-        my $id = $model -> insert( {
+        $model -> insert( {
             email => $login,
             salt => $salt,
             created => $now,
             blog_pageid => $pid,
+            invite => $invite -> { '_id' },
 
-        }, { safe => 1 } ) -> value();
+        }, { safe => 1 } );
     }
 
     $self -> session( srp_login => $login );
@@ -94,6 +106,11 @@ sub user {
 
     delete $self -> session() -> { 'srp_login' };
     delete $self -> session() -> { 'srp_salt' };
+
+    $self -> model( 'users.invites' ) -> remove( {
+        _id => $user -> { 'invite' },
+
+    }, { safe => 1 } );
 
     return $self -> render( json => {} );
 }

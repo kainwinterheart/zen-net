@@ -47,14 +47,14 @@ angular.module( 'zenNetSRPApp', [ 'zenNetSRPAuth', 'zenNetSRPRegister', 'zenNetG
 
 .controller( 'SRPController', function( $scope, SRPBits, SRPAuthMethod, SRPRegisterMethod ) {
 
-    $scope.username = undefined;
-    $scope.password = undefined;
-
     $scope.reset = function() {
 
         $scope.username = undefined;
         $scope.password = undefined;
+        $scope.invite = undefined;
     };
+
+    $scope.reset();
 
     var proto = function( method ) {
 
@@ -62,10 +62,11 @@ angular.module( 'zenNetSRPApp', [ 'zenNetSRPAuth', 'zenNetSRPRegister', 'zenNetG
 
             var I = $scope.username;
             var p = $scope.password;
+            var invite = $scope.invite;
 
             $scope.reset();
 
-            method( I, p, SRPBits );
+            method( I, p, SRPBits, invite );
 
             return false;
         };
