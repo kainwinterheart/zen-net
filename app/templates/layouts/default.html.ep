@@ -6,7 +6,8 @@
     <link href="/css/xeditable.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/css/loading-bar.css" />
-    <link rel="stylesheet" type="text/css" href="/css/ngTagEditor.css" />
+    <link rel="stylesheet" type="text/css" href="/css/ng-tags-input.css" />
+    <link rel="stylesheet" type="text/css" href="/css/ng-tags-input.bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/css/angular-ui-notification.min.css">
     <link rel="stylesheet" type="text/css" href="/css/app.css" />
 
@@ -20,7 +21,7 @@
     <script type="text/javascript" src="/js/showdown-prettify.js"></script>
     <script type="text/javascript" src="/js/ng/loading-bar.js"></script>
     <script type="text/javascript" src="/js/ng/ui-bootstrap-tpls-0.11.0.min.js"></script>
-    <script type="text/javascript" src="/js/ng/ngTagEditor.js"></script>
+    <script type="text/javascript" src="/js/ng/ng-tags-input.js"></script>
     <script type="text/javascript" src="/js/ng/angular-ui-notification.min.js"></script>
 
     <script type="text/javascript" src="/js/srp/jsbn.js"></script>

@@ -1,4 +1,4 @@
-angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTagEditor', 'zenNetGlobalState', 'ui-notification' ] )
+angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTagsInput', 'zenNetGlobalState', 'ui-notification' ] )
 
 .run( function( editableOptions )
 {
