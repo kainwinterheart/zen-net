@@ -12,6 +12,8 @@ sub index {
 
     my ( $self ) = @_;
 
+    $self -> stash( logged_in => ( $self -> session( 'uid' ) ? 1 : 0 ) );
+
     return $self -> render();
 }
 

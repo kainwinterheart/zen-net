@@ -3,7 +3,7 @@
         <div ng-show="post.id" class="panel-heading">&gt;&nbsp;{{ post.id }}</div>
         <div class="panel-body">
             <div onhide="prettyPrint()" editable-textarea="post.text" ng-bind-html="post.text | markdown"></div>
-            <tags-input ng-model="tags" display-property="name"></tags-input>
+            <tags-input class="tags-editor" ng-model="tags" display-property="name"></tags-input>
         </div>
         <div class="panel-footer">
             <button type="button" class="btn btn-default" ng-click="save()">Save</button>

@@ -44,7 +44,7 @@
   <body>
 
     <nav class="navbar navbar-inverse" style="border-radius:0px;" role="navigation">
-        <div ng-controller="AppHeader" class="container-fluid">
+        <div ng-controller="AppHeader" ng-init="gs.logged_in = <%= $logged_in %>" class="container-fluid">
             <div class="navbar-header">
                 <a href="#/" class="navbar-brand">Autumn Coffee</a>
             </div>
