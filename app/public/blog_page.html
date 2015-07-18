@@ -1,4 +1,23 @@
 <div class="center-block" style="width:98%;">
+
+    <ol class="breadcrumb" ng-show="only_this_tag">
+        <li><a href="#/blog">t</a></li>
+        <li ng-class="{active: $last}" ng-repeat="tag in only_this_tag">
+            <a href="#/blog/t/{{ tag.id | for_url }}" class="index-tag" ng-hide="$last">{{ tag.name }}</a>
+            {{ $last ? tag.name : '' }}
+        </li>
+    </ol>
+
+    <ol class="breadcrumb" ng-show="only_this_blog">
+        <li><a href="#/blog">u</a></li>
+        <li class="active">{{ only_this_blog }}</li>
+    </ol>
+
+    <div class="subtags" ng-show="tags.length" style="width:70%;">
+        <span>Subtags:</span>
+        <a href="#/blog/t/{{ tag.id | for_url }}" class="index-tag" ng-repeat="tag in tags">{{ tag.name }}</a>
+    </div>
+
     <div class="blog-post" ng-repeat="post in posts">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -9,9 +28,7 @@
                 <div class="post-text" ng-bind-html="post.text | markdown"></div>
             </div>
             <div class="panel-footer">
-                <p class="post-tags" ng-show="post.tags.length">
-                    <a href="#/blog/t/{{ tag | for_url }}" class="post-tag" ng-repeat="tag in post.tags">{{ tag }}</a>
-                </p>
+                <tags-display tags="post.tags" ng-show="post.tags"></tags-display>
                 <div>
                     <span>&copy; {{ post.updated }}</span>
                     <a href="#/blog/u/{{ post.blog | for_url }}">/u/{{ post.blog }}</a>
@@ -20,5 +37,4 @@
         </div>
     </div>
     <button ng-show="next_page_from" type="button" class="btn btn-default" ng-click="next_page()">Load more</button>
-    <button ng-show="only_this_blog || only_this_tag" type="button" class="btn btn-default" ng-click="back_to_all()">Clean filter</button>
 </div>

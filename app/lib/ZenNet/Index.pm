@@ -13,6 +13,7 @@ sub index {
     my ( $self ) = @_;
 
     $self -> stash( logged_in => ( $self -> session( 'uid' ) ? 1 : 0 ) );
+    $self -> stash( rev => $self -> app() -> cget( 'rev' ) );
 
     return $self -> render();
 }
@@ -23,6 +24,7 @@ sub real_index {
 
     my @list = $self -> model( 'tags.tags' ) -> find( {
         c => { '$gt' => 0 },
+        l => 0,
 
     } ) -> sort( { c => -1 } ) -> limit( TAGS_ON_PAGE ) -> all();
 

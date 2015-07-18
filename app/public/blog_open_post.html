@@ -8,9 +8,7 @@
             <div class="post-text" ng-bind-html="post.text | markdown"></div>
         </div>
         <div class="panel-footer">
-            <p class="post-tags" ng-show="post.tags.length">
-                <a href="#/blog/t/{{ tag | for_url }}" class="post-tag" ng-repeat="tag in post.tags">{{ tag }}</a>
-            </p>
+            <tags-display tags="post.tags" ng-show="post.tags"></tags-display>
             <div>
                 <span>&copy; {{ post.updated }}</span>
                 <a href="#/blog/u/{{ post.blog | for_url }}">/u/{{ post.blog }}</a>

@@ -21,7 +21,9 @@
                     { "name": "libgmp-dev" }
                 ] } },
                 { "name": "CryptX" },
-                { "name": "Email::Valid" }
+                { "name": "Email::Valid" },
+                { "name": "Salvation::TC" },
+                { "name": "boolean" }
             ]
         },
         "nginx-simple": {

@@ -39,18 +39,45 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
             method: 'GET',
             url: '/blog' +
                 ( $routeParams.page ? '/u/' + encodeURIComponent( $routeParams.page ) : '' ) +
-                ( $routeParams.tag ? '/t/' + encodeURIComponent( $routeParams.tag ) : '' )
+                ( $routeParams.tag ? '/t/' + encodeURIComponent( $routeParams.tag ) : '' ) +
+                ( $routeParams.subtags ? '/' + encodeURIComponent( $routeParams.subtags ) : '' )
         } )
             .success( function( data ) {
 
                 deferred.resolve( function( ctx ) {
 
+                    ctx.$scope.tags = ( data.tags || [] ).map( function( el ) {
+
+                        return { id: el, name: el.split( /\// ).pop() };
+                    } );
+
                     ctx.$scope.posts = data.posts.map( function( el ) {
                         return ctx.transform_post( el );
                     } );
+
                     ctx.$scope.next_page_from = data.next_page_from;
                     ctx.$scope.only_this_blog = data.only_this_blog;
-                    ctx.$scope.only_this_tag = data.only_this_tag;
+
+                    if( data.only_this_tag ) {
+
+                        var only_this_tag = data.only_this_tag.split( /\// );
+                        var prev_tags = [];
+
+                        ctx.$scope.only_this_tag = only_this_tag.map( function( el ) {
+
+                            prev_tags.push( el );
+
+                            return {
+                                name: el,
+                                id: prev_tags.join( '/' )
+                            };
+                        } );
+
+                    } else {
+
+                        ctx.$scope.only_this_tag = data.only_this_tag;
+                    }
+
                     ctx.GlobalState.logged_in = data.logged_in;
 
                     ctx.$scope.prettyPrint();
@@ -141,14 +168,6 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
         ;
     };
 
-    $scope.back_to_all = function() {
-
-        if( ( $scope.only_this_blog !== undefined ) || ( $scope.only_this_tag !== undefined ) ) {
-
-            $location.path( '/blog' );
-        }
-    };
-
     function transform_post( post ) {
 
         if( post.trimmed ) {
@@ -191,9 +210,7 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
     $scope.tags = [];
     $scope.$watch( 'post.tags', function( list ) {
 
-        $scope.tags = ( list || [] ).map( function( tag ) {
-            return { name: tag };
-        } );
+        $scope.tags = ( list || [] );
     } );
 
     $controller( 'BlogOpenPostController', {
@@ -211,9 +228,7 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
             headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF8' },
             data: BlogBuildParams( {
                 text: $scope.post.text,
-                tag: $scope.tags.map( function( tag ) {
-                    return tag.name;
-                } ),
+                tag: angular.toJson( $scope.tags ),
                 id: $scope.post.id,
                 version: $scope.post.version
             } )
@@ -263,9 +278,7 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
             headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF8' },
             data: BlogBuildParams( {
                 text: $scope.post.text,
-                tag: $scope.tags.map( function( tag ) {
-                    return tag.name;
-                } ),
+                tag: angular.toJson( $scope.tags ),
             } )
         } )
             .success( function( data ) {
@@ -313,6 +326,68 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
         var html = converter.makeHtml( ( value || '' ).replace( />/g, '&gt;' ).replace( /</g, '&lt;' ) );
 
         return $sce.trustAsHtml( html );
+    };
+} )
+
+.directive( 'tagsTree', function( $compile ) {
+
+    return {
+        templateUrl: 'tags_tree.html?' + zenNetRev,
+        restrict: 'E',
+        scope: {
+            tags: '=',
+            sourceTag: '='
+        },
+        /* is magic recursion implementation */
+        compile: function( tElement, tAttrs, transclude ) {
+
+            var contents = tElement.contents().remove();
+            var compiledContents = undefined;
+
+            return function( scope, element, attrs ) {
+
+                if( ! compiledContents ) {
+
+                    compiledContents = $compile( contents, transclude );
+                }
+
+                compiledContents( scope, function( clone, scope ) {
+
+                    element.append( clone );
+                } );
+            };
+        }
+    };
+} )
+
+.directive( 'tagsDisplay', function( $compile ) {
+
+    return {
+        templateUrl: 'tags_display.html?' + zenNetRev,
+        restrict: 'E',
+        scope: {
+            tags: '=',
+            sourceTag: '='
+        },
+        /* is magic recursion implementation */
+        compile: function( tElement, tAttrs, transclude ) {
+
+            var contents = tElement.contents().remove();
+            var compiledContents = undefined;
+
+            return function( scope, element, attrs ) {
+
+                if( ! compiledContents ) {
+
+                    compiledContents = $compile( contents, transclude );
+                }
+
+                compiledContents( scope, function( clone, scope ) {
+
+                    element.append( clone );
+                } );
+            };
+        }
     };
 } )
 

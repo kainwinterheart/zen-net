@@ -7,15 +7,15 @@ angular.module( 'zenNet', [ 'ngRoute', 'angular-loading-bar', 'zenNetSRPApp', 'z
     $routeProvider
         .when( '/register', {
             controller: 'SRPController',
-            templateUrl: '/register.html'
+            templateUrl: '/register.html?' + zenNetRev
         } )
         .when( '/login', {
             controller: 'SRPController',
-            templateUrl: '/login.html'
+            templateUrl: '/login.html?' + zenNetRev
         } )
         .when( '/blog', {
             controller: 'BlogPageController',
-            templateUrl: '/blog_page.html',
+            templateUrl: '/blog_page.html?' + zenNetRev,
             resolve: {
                 initialPosts: function( BlogPagePostsLoader, $route ) {
                     return BlogPagePostsLoader( $route.current.params );
@@ -24,7 +24,7 @@ angular.module( 'zenNet', [ 'ngRoute', 'angular-loading-bar', 'zenNetSRPApp', 'z
         } )
         .when( '/blog/u/:page', {
             controller: 'BlogPageController',
-            templateUrl: '/blog_page.html',
+            templateUrl: '/blog_page.html?' + zenNetRev,
             resolve: {
                 initialPosts: function( BlogPagePostsLoader, $route ) {
                     return BlogPagePostsLoader( $route.current.params );
@@ -33,7 +33,16 @@ angular.module( 'zenNet', [ 'ngRoute', 'angular-loading-bar', 'zenNetSRPApp', 'z
         } )
         .when( '/blog/t/:tag', {
             controller: 'BlogPageController',
-            templateUrl: '/blog_page.html',
+            templateUrl: '/blog_page.html?' + zenNetRev,
+            resolve: {
+                initialPosts: function( BlogPagePostsLoader, $route ) {
+                    return BlogPagePostsLoader( $route.current.params );
+                }
+            }
+        } )
+        .when( '/blog/t/:tag/:subtags*', {
+            controller: 'BlogPageController',
+            templateUrl: '/blog_page.html?' + zenNetRev,
             resolve: {
                 initialPosts: function( BlogPagePostsLoader, $route ) {
                     return BlogPagePostsLoader( $route.current.params );
@@ -42,7 +51,7 @@ angular.module( 'zenNet', [ 'ngRoute', 'angular-loading-bar', 'zenNetSRPApp', 'z
         } )
         .when( '/blog/p/:id', {
             controller: 'BlogOpenPostController',
-            templateUrl: '/blog_open_post.html',
+            templateUrl: '/blog_open_post.html?' + zenNetRev,
             resolve: {
                 initialPost: function( BlogOpenPostLoader, $route ) {
                     return BlogOpenPostLoader( $route.current.params );
@@ -51,7 +60,7 @@ angular.module( 'zenNet', [ 'ngRoute', 'angular-loading-bar', 'zenNetSRPApp', 'z
         } )
         .when( '/blog/e/:id', {
             controller: 'BlogEditPostController',
-            templateUrl: '/blog_edit_post.html',
+            templateUrl: '/blog_edit_post.html?' + zenNetRev,
             resolve: {
                 initialPost: function( BlogOpenPostLoader, $route ) {
                     return BlogOpenPostLoader( $route.current.params );
@@ -60,11 +69,11 @@ angular.module( 'zenNet', [ 'ngRoute', 'angular-loading-bar', 'zenNetSRPApp', 'z
         } )
         .when( '/blog/new', {
             controller: 'BlogNewPostController',
-            templateUrl: '/blog_edit_post.html'
+            templateUrl: '/blog_edit_post.html?' + zenNetRev
         } )
         .otherwise( {
             controller: 'IndexPage',
-            templateUrl: '/index.html',
+            templateUrl: '/index.html?' + zenNetRev,
             resolve: {
                 initialState: function( IndexPageLoader, $route ) {
                     return IndexPageLoader( $route.current.params );

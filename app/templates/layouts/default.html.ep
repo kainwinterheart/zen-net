@@ -2,44 +2,46 @@
 <html ng-app="zenNet">
   <head>
     <title>Autumn Coffee</title>
-    <link href="/js/google-code-prettify/prettify.css" rel="stylesheet" />
-    <link href="/css/xeditable.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="/css/loading-bar.css" />
-    <link rel="stylesheet" type="text/css" href="/css/ng-tags-input.css" />
-    <link rel="stylesheet" type="text/css" href="/css/ng-tags-input.bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="/css/angular-ui-notification.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/app.css" />
+    <script type="text/javascript">window['zenNetRev'] = '<%= $rev %>';</script>
 
-    <script type="text/javascript" src="/js/ng/angular.min.js"></script>
-    <script type="text/javascript" src="/js/ng/angular-route.min.js"></script>
-    <script type="text/javascript" src="/js/ng/xeditable.min.js"></script>
-    <script type="text/javascript" src="/js/google-code-prettify/prettify.js"></script>
-    <script type="text/javascript" src="/js/google-code-prettify/run_prettify.js"></script>
-    <script type="text/javascript" src="/js/showdown.js"></script>
-    <script type="text/javascript" src="/js/showdown-table.js"></script>
-    <script type="text/javascript" src="/js/showdown-prettify.js"></script>
-    <script type="text/javascript" src="/js/ng/loading-bar.js"></script>
-    <script type="text/javascript" src="/js/ng/ui-bootstrap-tpls-0.11.0.min.js"></script>
-    <script type="text/javascript" src="/js/ng/ng-tags-input.js"></script>
-    <script type="text/javascript" src="/js/ng/angular-ui-notification.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/js/google-code-prettify/prettify.css?<%= $rev %>" />
+    <link rel="stylesheet" type="text/css" href="/css/xeditable.css?<%= $rev %>" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css?<%= $rev %>" />
+    <link rel="stylesheet" type="text/css" href="/css/loading-bar.css?<%= $rev %>" />
+    <link rel="stylesheet" type="text/css" href="/css/ng-tags-input.css?<%= $rev %>" />
+    <link rel="stylesheet" type="text/css" href="/css/ng-tags-input.bootstrap.css?<%= $rev %>" />
+    <link rel="stylesheet" type="text/css" href="/css/angular-ui-notification.min.css?<%= $rev %>">
+    <link rel="stylesheet" type="text/css" href="/css/app.css?<%= $rev %>" />
 
-    <script type="text/javascript" src="/js/srp/jsbn.js"></script>
-    <script type="text/javascript" src="/js/srp/jsbn2.js"></script>
-    <script type="text/javascript" src="/js/srp/sha1.js"></script>
-    <script type="text/javascript" src="/js/srp/sjcl.js"></script>
+    <script type="text/javascript" src="/js/ng/angular.min.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/ng/angular-route.min.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/ng/xeditable.min.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/google-code-prettify/prettify.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/google-code-prettify/run_prettify.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/showdown.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/showdown-table.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/showdown-prettify.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/ng/loading-bar.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/ng/ui-bootstrap-tpls-0.11.0.min.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/ng/ng-tags-input.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/ng/angular-ui-notification.min.js?<%= $rev %>"></script>
 
-    <script type="text/javascript" src="/js/srp/ng/srp-internals.js"></script>
-    <script type="text/javascript" src="/js/srp/ng/srp-client.js"></script>
-    <script type="text/javascript" src="/js/srp/ng/srp-auth.js"></script>
-    <script type="text/javascript" src="/js/srp/ng/srp-register.js"></script>
-    <script type="text/javascript" src="/js/srp/ng/app.js"></script>
+    <script type="text/javascript" src="/js/srp/jsbn.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/srp/jsbn2.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/srp/sha1.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/srp/sjcl.js?<%= $rev %>"></script>
 
-    <script type="text/javascript" src="/js/blog/ng/app.js"></script>
+    <script type="text/javascript" src="/js/srp/ng/srp-internals.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/srp/ng/srp-client.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/srp/ng/srp-auth.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/srp/ng/srp-register.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/srp/ng/app.js?<%= $rev %>"></script>
 
-    <script type="text/javascript" src="/js/global_state.js"></script>
+    <script type="text/javascript" src="/js/blog/ng/app.js?<%= $rev %>"></script>
 
-    <script type="text/javascript" src="/js/app.js"></script>
+    <script type="text/javascript" src="/js/global_state.js?<%= $rev %>"></script>
+
+    <script type="text/javascript" src="/js/app.js?<%= $rev %>"></script>
   </head>
   <body>
 

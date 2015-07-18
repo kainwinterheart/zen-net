@@ -1,0 +1,6 @@
+<accordion ng-show="tags.length">
+  <accordion-group heading="Specify {{ ( sourceTag ? sourceTag + '/' : '' ) + tag.name }} subtags..." ng-repeat="tag in tags" class="subtags-container">
+      <tags-input placeholder="Add a subtag" class="tags-editor" ng-model="tag.tags" display-property="name"></tags-input>
+      <tags-tree source-tag="( sourceTag ? sourceTag + '/' : '' ) + tag.name" tags="tag.tags"></tags-tree>
+  </accordion-group>
+</accordion>

@@ -1,0 +1,4 @@
+<div class="post-tags" ng-repeat="tag in tags">
+    <a href="#/blog/t/{{ ( sourceTag ? sourceTag + '/' : '' ) + tag.name | for_url }}" class="post-tag">{{ ( sourceTag ? sourceTag + '/' : '' ) + tag.name }}</a>
+    <tags-display source-tag="( sourceTag ? sourceTag + '/' : '' ) + tag.name" tags="tag.tags" ng-show="tag.tags"></tags-display>
+</div>

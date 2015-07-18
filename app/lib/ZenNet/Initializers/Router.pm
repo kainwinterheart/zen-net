@@ -46,6 +46,11 @@ sub main {
         action => 'list_by_tag'
     );
 
+    $r -> get( '/blog/t/#tag/*subtags' ) -> to(
+        controller => 'Blog::Page',
+        action => 'list_by_tag'
+    );
+
     $r -> get( '/blog/p/:id' ) -> to(
         controller => 'Blog::Post',
         action => 'open'
