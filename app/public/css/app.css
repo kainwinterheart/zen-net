@@ -1,4 +1,5 @@
 html, body {
+
     line-height: 1;
     font: 13px Helvetica, 'Liberation Sans', Arial, FreeSans, sans-serif;
     background-color: #ffffff;
@@ -10,14 +11,17 @@ html, body {
 }
 
 form.editable-textarea {
+
     width: 100%;
 }
 
 form.editable-textarea > div {
+
     width: 80%;
 }
 
 form.editable-textarea > div > textarea {
+
     width: 100% !important;
     min-height: 500px;
     font-family: monospace;
@@ -25,6 +29,7 @@ form.editable-textarea > div > textarea {
 }
 
 form.editable-textarea .editable-buttons button {
+
     display: block;
     margin-bottom: 4px;
 }
@@ -98,4 +103,22 @@ tags-display {
 .subtags .index-tag {
 
     font-size: 12px;
+}
+
+.blog-post .panel-body > div,
+.blog-post .panel-body > div:hover {
+
+    color: inherit;
+}
+
+.blog-post .panel-body table td,
+.blog-post .panel-body table th {
+
+    border: 1px solid #cccccc;
+    padding: 12px;
+}
+
+.blog-post .panel-body img {
+
+    max-width: 100%;
 }
