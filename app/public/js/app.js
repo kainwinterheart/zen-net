@@ -104,6 +104,7 @@ angular.module( 'zenNet', [ 'ngRoute', 'angular-loading-bar', 'zenNetSRPApp', 'z
             .error( function() {
 
                 Notification.error( 'Internal error' );
+                deferred.reject();
             } )
         ;
 

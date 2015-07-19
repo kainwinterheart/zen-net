@@ -86,9 +86,8 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
             } )
             .error( function() {
 
-                deferred.resolve( function() {
-                    Notification.error( 'Internal error' );
-                } );
+                Notification.error( 'Internal error' );
+                deferred.reject();
             } )
         ;
 
@@ -119,6 +118,7 @@ angular.module( 'zenNetBlogApp', [ 'ui.bootstrap', 'xeditable', 'ngRoute', 'ngTa
             .error( function() {
 
                 Notification.error( 'Internal error' );
+                deferred.reject();
             } )
         ;
 
