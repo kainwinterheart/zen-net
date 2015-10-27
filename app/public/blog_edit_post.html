@@ -2,7 +2,7 @@
     <div class="panel panel-default">
         <div ng-show="post.id" class="panel-heading">&gt;&nbsp;{{ post.id }}</div>
         <div class="panel-body">
-            <div onhide="prettyPrint()" editable-textarea="post.text" ng-bind-html="post.text | markdown"></div>
+            <div onhide="prettyPrint()" editable-textarea="post.text" blur="submit" ng-bind-html="post.text | markdown"></div>
             <tags-input class="tags-editor" ng-model="tags" display-property="name"></tags-input>
             <tags-tree tags="tags"></tags-tree>
         </div>
