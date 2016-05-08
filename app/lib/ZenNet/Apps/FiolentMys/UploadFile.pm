@@ -8,6 +8,9 @@ use Salvation::TC ();
 
 sub upload {
     my $self = shift;
+
+    $self->user_must_can('edit');
+
     my $file = $self->param('file');
     my $max_upload_size = $self->zapp_config->{max_upload_size};
     Salvation::TC->assert($max_upload_size, 'Int');
