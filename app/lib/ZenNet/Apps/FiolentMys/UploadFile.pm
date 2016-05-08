@@ -31,7 +31,7 @@ sub upload {
     }
 
     $path = do {
-        my $name = $self->filename;
+        my $name = $file->filename;
 
         $name =~ s/^.*\///;
         $name =~ s/^.*\\//;
