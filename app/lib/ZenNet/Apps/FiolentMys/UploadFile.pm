@@ -35,7 +35,7 @@ sub upload {
     my $root = $self->docroot;
     my $path = $root;
 
-    foreach my $part (qw/imgs upload/, substr($md5, 0, 2, ''), substr($md5, 0, 4, '')) {
+    foreach my $part (qw/imgs upload/, substr($md5, 0, 2, ''), substr($md5, 0, 10, '')) {
         $path = File::Spec->catfile($path, $part);
 
         unless(-e $path) {
