@@ -31,6 +31,9 @@ sub open {
 
                     } elsif(defined($type) && defined($id)) {
                         if($line =~ m/^<!--\/block-->$/) {
+                            eval{ $data = decode_utf8($data) };
+                            $data = encode_utf8($data);
+
                             if($type eq 'gallery') {
                                 eval{ $data = [map({$_->{href}} @{XMLin($data, ForceArray => 1)->{a}})] };
 
@@ -90,7 +93,10 @@ sub save {
     my $header = File::Spec->abs2rel($self->doc_path("inc/header.html"), $page_dir);
     my $footer = File::Spec->abs2rel($self->doc_path("inc/footer.html"), $page_dir);
 
-    my $data = decode_json(encode_utf8($self->req->param('data')));
+    my $data = $self->req->param('data');
+    eval{ $data = decode_utf8($data) };
+    $data = decode_json(encode_utf8($data));
+
     Salvation::TC->assert($data, 'ArrayRef[ArrayRef(Str type, Int id, ArrayRef[Str]|Str data)]');
 
     if(CORE::open(my $fh, '>', $tmp_path)) {
