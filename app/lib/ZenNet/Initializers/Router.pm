@@ -67,12 +67,12 @@ sub main {
     );
 
     $r->get('/app/fiolentmys/page/edit')->to(
-        controller => 'ZenNet::Apps::FiolentMys::Page',
+        controller => 'Apps::FiolentMys::Page',
         action => 'open',
     );
 
     $r->post('/app/fiolentmys/page/save')->to(
-        controller => 'ZenNet::Apps::FiolentMys::Page',
+        controller => 'Apps::FiolentMys::Page',
         action => 'save',
     );
 
