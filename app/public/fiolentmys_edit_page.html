@@ -3,19 +3,21 @@
         <span>Добавить вверху:</span>
         <input type="button" value="галлерею" ng-click="add_block('gallery', -1, '')" />
         <input type="button" value="html" ng-click="add_block('html', -1, '')" />
+        <input type="button" value="произвольный код" ng-click="add_block('custom', -1, '')" />
     </div>
     <div class="block" ng-repeat="id in blocks">
-        <div ng-if="data[id][0] == 'gallery'">
-            <!-- TODO -->
-            <textarea style="width:320px;height:240px;" ng-model="data[id][1]"></textarea>
+        <div ng-if="data[id][0] != 'html'">
+            <!-- TODO: special control for gallery -->
+            <textarea style="width:100%;height:240px;" ng-model="data[id][1]"></textarea>
         </div>
-        <div ng-if="data[id][0] != 'gallery'">
-            <textarea ui-tinymce="tinymceOptions" ng-model="data[id][1]" class="richarea"></textarea>
+        <div ng-if="data[id][0] == 'html'">
+            <textarea ui-tinymce="tinymceOptions" ng-model="data[id][1]"></textarea>
         </div>
         <div>
             <span>Добавить после блока:</span>
             <input type="button" value="галлерею" ng-click="add_block('gallery', $index, '')" />
             <input type="button" value="html" ng-click="add_block('html', $index, '')" />
+            <input type="button" value="произвольный код" ng-click="add_block('custom', $index, '')" />
             <br />
             <input type="button" value="Удалить блок" ng-click="remove_block($index)" />
         </div>
