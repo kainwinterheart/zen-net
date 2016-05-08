@@ -183,6 +183,22 @@ angular.module('zenNetAppsFiolentMysApp', ['ui.bootstrap', 'ui-notification', 'z
 
 .controller('FiolentMysUploadFile', function($scope) {
     $scope.__userFiles = [];
+
+    $scope.url_or_error = function(data) {
+        try {
+            data = JSON.parse(data.status.response);
+
+        } catch(e) {
+            return 'Internal error';
+        }
+
+        if(data.hasOwnProperty('error')) {
+            return data.error;
+
+        } else {
+            return data.url;
+        }
+    };
 })
 
 ;
