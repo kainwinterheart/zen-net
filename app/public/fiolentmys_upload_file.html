@@ -12,7 +12,7 @@
 </file-upload>
 
 <div>
-    <div ng-repeat="p in __userFiles" ng-hide="p.percent != 100">
+    <div ng-repeat="p in __userFiles" ng-hide="p.percent != 100" style="padding: 4px;">
         <span style="font-weight: bold;">{{ p.name }}</span><span>:</span>
         <span>{{ url_or_error(p) }}</span>
     </div>
