@@ -17,7 +17,7 @@ sub open {
     my @data = ();
 
     if(-e $path) {
-        if(open(my $fh, '<', $path)) {
+        if(CORE::open(my $fh, '<', $path)) {
             if(flock($fh, 2)) {
                 my $id = undef;
                 my $type = undef;
@@ -64,6 +64,7 @@ sub open {
     return $self->render(json => {
         page => $self->req->param('page'),
         content => \@data,
+        logged_in => !! $self->session('uid'),
     });
 }
 
@@ -86,7 +87,7 @@ sub save {
     my $data = decode_json($self->req->param('data'));
     Salvation::TC->assert($data, 'ArrayRef[ArrayRef(Str type, Int id, ArrayRef[Str]|Str data)]');
 
-    if(open(my $fh, '>', $tmp_path)) {
+    if(CORE::open(my $fh, '>', $tmp_path)) {
         if(flock($fh, 2)) {
             $fh->print(sprintf('<!--# include file="%s" -->' . "\n", $header));
 
@@ -133,6 +134,7 @@ sub save {
 
     return $self->render(json => {
         page => $self->req->param('page'),
+        logged_in => !! $self->session('uid'),
     });
 }
 

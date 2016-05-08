@@ -43,6 +43,12 @@ sub logout {
     return $self -> redirect_to( '/' );
 }
 
+sub ping {
+    return $_[0]->render(json => {
+        logged_in => !! $_[0]->session('uid'),
+    });
+}
+
 1;
 
 __END__

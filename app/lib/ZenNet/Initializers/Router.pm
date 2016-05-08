@@ -76,6 +76,8 @@ sub main {
         action => 'save',
     );
 
+    $r->get('/ping')->to('index#ping');
+
     return;
 }
 

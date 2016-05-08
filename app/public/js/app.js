@@ -1,4 +1,4 @@
-angular.module( 'zenNet', [ 'ngRoute', 'angular-loading-bar', 'zenNetSRPApp', 'zenNetBlogApp', 'zenNetGlobalState', 'ui-notification' ] )
+angular.module( 'zenNet', [ 'ngRoute', 'angular-loading-bar', 'zenNetSRPApp', 'zenNetBlogApp', 'zenNetGlobalState', 'ui-notification', 'zenNetAppsFiolentMysApp' ] )
 
 .config( function( $routeProvider, cfpLoadingBarProvider ) {
 
@@ -71,6 +71,15 @@ angular.module( 'zenNet', [ 'ngRoute', 'angular-loading-bar', 'zenNetSRPApp', 'z
             controller: 'BlogNewPostController',
             templateUrl: '/blog_edit_post.html?' + zenNetRev
         } )
+        .when('/app/fiolentmys/page/edit', {
+            controller: 'FiolentMysEditPage',
+            templateUrl: '/fiolentmys_edit_page.html?' + zenNetRev,
+            resolve: {
+                pageData: function(FiolentMysPageLoader, $location) {
+                    return FiolentMysPageLoader($location.search());
+                }
+            }
+        })
         .otherwise( {
             controller: 'IndexPage',
             templateUrl: '/index.html?' + zenNetRev,
