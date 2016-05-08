@@ -181,7 +181,7 @@ angular.module('zenNetAppsFiolentMysApp', ['ui.bootstrap', 'ui-notification', 'z
     });
 })
 
-.controller('FiolentMysUploadFile', function($scope, GlobalState) {
+.controller('FiolentMysUploadFile', function($scope, GlobalState, $location) {
     if(!GlobalState.logged_in) {
         $location.path('/');
         return;
