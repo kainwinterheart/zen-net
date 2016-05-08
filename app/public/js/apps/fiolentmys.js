@@ -185,6 +185,10 @@ angular.module('zenNetAppsFiolentMysApp', ['ui.bootstrap', 'ui-notification', 'z
     $scope.__userFiles = [];
 
     $scope.url_or_error = function(data) {
+        if(((data.status || {}).response || '').length == 0) {
+            return 'Still loading...';
+        }
+
         try {
             data = JSON.parse(data.status.response);
 
