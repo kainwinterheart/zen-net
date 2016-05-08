@@ -6,6 +6,7 @@ use JSON 'decode_json';
 use Encode 'decode_utf8', 'encode_utf8';
 use File::Copy 'move';
 use File::Spec ();
+use URI::Escape 'uri_escape';
 use XML::Simple 'XMLin';
 use Salvation::TC ();
 
@@ -81,7 +82,8 @@ sub save {
 
     $self->user_must_can('edit');
 
-    my $path = $self->doc_path($self->req->param('page'));
+    my $page = $self->req->param('page');
+    my $path = $self->doc_path($page);
     my $tmp_path = "${path}.new";
     my $page_dir = do {
         my @parts = File::Spec->splitdir($path);
@@ -101,6 +103,8 @@ sub save {
     if(CORE::open(my $fh, '>', $tmp_path)) {
         if(flock($fh, 2)) {
             $fh->print(sprintf('<!--# include file="%s" -->' . "\n", $header));
+            $fh->print('<div id="apps_fiolentmys_widget"></div>' . "\n");
+            $fh->print(sprintf('<script type="text/javascript" src="https://autumncoffee.com/app/fiolentmys/widget?page=%s"></script>' . "\n", uri_escape($page)));
 
             while(defined(my $node = shift(@$data))) {
                 $fh->print(sprintf('<!--block%d:%s-->' . "\n", @$node[1, 0]));
@@ -144,9 +148,21 @@ sub save {
     }
 
     return $self->render(json => {
-        page => $self->req->param('page'),
+        page => $page,
         logged_in => !! $self->session('uid'),
     });
+}
+
+sub widget {
+    my $self = shift;
+    my $template = 'no_edit_page';
+
+    if($self->can_user('edit')) {
+        $template = 'edit_page';
+        $self->stash(page => uri_escape($self->req->param("page")));
+    }
+
+    return $self->render(template => "apps/fiolentmys/${template}", format => 'html');
 }
 
 1;

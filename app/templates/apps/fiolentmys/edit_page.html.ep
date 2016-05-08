@@ -1,0 +1,3 @@
+(function() {
+    document.getElementById('apps_fiolentmys_widget').innerHTML = '<a href="https://autumncoffee.com/#/app/fiolentmys/page/edit?page=<%= $page %>">Редактировать страницу.</a>';
+})();

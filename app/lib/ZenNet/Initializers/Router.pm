@@ -76,6 +76,11 @@ sub main {
         action => 'save',
     );
 
+    $r->get('/app/fiolentmys/widget')->to(
+        controller => 'Apps::FiolentMys::Page',
+        action => 'widget',
+    );
+
     $r->get('/ping')->to('index#ping');
 
     return;
