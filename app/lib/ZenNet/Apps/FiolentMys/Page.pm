@@ -56,6 +56,9 @@ sub open {
         } else {
             die("open(${path}): $!");
         }
+
+    } else {
+        warn("Path ${path} does not exist");
     }
 
     return $self->render(json => {
