@@ -66,6 +66,16 @@ sub main {
         action => 'create'
     );
 
+    $r->get('/app/fiolentmys/page/edit')->to(
+        controller => 'ZenNet::Apps::FiolentMys::Page',
+        action => 'open',
+    );
+
+    $r->post('/app/fiolentmys/page/save')->to(
+        controller => 'ZenNet::Apps::FiolentMys::Page',
+        action => 'save',
+    );
+
     return;
 }
 
