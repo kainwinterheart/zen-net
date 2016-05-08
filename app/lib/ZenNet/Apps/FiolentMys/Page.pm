@@ -31,7 +31,11 @@ sub open {
                     } elsif(defined($type) && defined($id)) {
                         if($line =~ m/^<!--\/block-->$/) {
                             if($type eq 'gallery') {
-                                $data = [map({$_->{href}} @{XMLin($data, ForceArray => 1)->{a}})];
+                                eval{ $data = [map({$_->{href}} @{XMLin($data, ForceArray => 1)->{a}})] };
+
+                                if($@) {
+                                    die("$@: ${data}");
+                                }
                             }
 
                             push(@data, [$type, $id, $data]);

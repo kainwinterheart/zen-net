@@ -25,6 +25,7 @@
     <script type="text/javascript" src="/js/ng/ui-bootstrap-tpls-0.11.0.min.js?<%= $rev %>"></script>
     <script type="text/javascript" src="/js/ng/ng-tags-input.js?<%= $rev %>"></script>
     <script type="text/javascript" src="/js/ng/angular-ui-notification.min.js?<%= $rev %>"></script>
+    <script type="text/javascript" src="/js/ng/tinymce.min.js?<%= $rev %>"></script>
     <script type="text/javascript" src="/tinymce/tinymce.min.js?<%= $rev %>"></script>
 
     <script type="text/javascript" src="/js/srp/jsbn.js?<%= $rev %>"></script>

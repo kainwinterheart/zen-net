@@ -7,10 +7,10 @@
     <div class="block" ng-repeat="id in blocks">
         <div ng-if="data[id][0] == 'gallery'">
             <!-- TODO -->
-            <textarea style="width:800px;height:600px;" ng-model="data[id][1]"></textarea>
+            <textarea style="width:320px;height:240px;" ng-model="data[id][1]"></textarea>
         </div>
         <div ng-if="data[id][0] != 'gallery'">
-            <textarea ng-model="data[id][1]" class="richarea"></textarea>
+            <textarea ui-tinymce ng-model="data[id][1]" class="richarea"></textarea>
         </div>
         <div>
             <span>Добавить после блока:</span>
