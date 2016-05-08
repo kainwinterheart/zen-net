@@ -81,6 +81,11 @@ sub main {
         action => 'widget',
     );
 
+    $r->post('/app/fiolentmys/upload')->to(
+        controller => 'Apps::FiolentMys::UploadFile',
+        action => 'upload',
+    );
+
     $r->get('/ping')->to('index#ping');
 
     return;

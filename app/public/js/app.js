@@ -80,6 +80,10 @@ angular.module( 'zenNet', [ 'ngRoute', 'angular-loading-bar', 'zenNetSRPApp', 'z
                 }
             }
         })
+        .when('/app/fiolentmys/upload', {
+            controller: 'FiolentMysUploadFile',
+            templateUrl: '/fiolentmys_upload_file.html?' + zenNetRev
+        })
         .otherwise( {
             controller: 'IndexPage',
             templateUrl: '/index.html?' + zenNetRev,

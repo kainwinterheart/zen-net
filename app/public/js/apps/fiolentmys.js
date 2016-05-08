@@ -1,4 +1,4 @@
-angular.module('zenNetAppsFiolentMysApp', ['ui.bootstrap', 'ui-notification', 'zenNetGlobalState', 'ui.tinymce'])
+angular.module('zenNetAppsFiolentMysApp', ['ui.bootstrap', 'ui-notification', 'zenNetGlobalState', 'ui.tinymce', 'fileUpload'])
 
 .factory('FiolentMysPageLoader', function($http, $q, Notification) {
     return function($routeParams) {
@@ -179,6 +179,9 @@ angular.module('zenNetAppsFiolentMysApp', ['ui.bootstrap', 'ui-notification', 'z
         '$scope': $scope,
         'GlobalState': GlobalState
     });
+})
+
+.controller('FiolentMysUploadFile', function() {
 })
 
 ;
