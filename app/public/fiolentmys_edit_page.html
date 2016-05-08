@@ -10,7 +10,7 @@
             <textarea style="width:320px;height:240px;" ng-model="data[id][1]"></textarea>
         </div>
         <div ng-if="data[id][0] != 'gallery'">
-            <textarea ui-tinymce ng-model="data[id][1]" class="richarea"></textarea>
+            <textarea ui-tinymce="tinymceOptions" ng-model="data[id][1]" class="richarea"></textarea>
         </div>
         <div>
             <span>Добавить после блока:</span>

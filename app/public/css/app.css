@@ -122,3 +122,7 @@ tags-display {
 
     max-width: 100%;
 }
+
+.richarea {
+    height: 600px;
+}
