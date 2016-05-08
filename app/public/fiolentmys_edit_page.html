@@ -4,6 +4,7 @@
         <input type="button" value="галлерею" ng-click="add_block('gallery', -1, '')" />
         <input type="button" value="html" ng-click="add_block('html', -1, '')" />
         <input type="button" value="произвольный код" ng-click="add_block('custom', -1, '')" />
+        <a ng-href="https://fiolentmys.ru/{{ page }}" target="_blank">Открыть страницу.</a>
     </div>
     <div class="block" ng-repeat="id in blocks">
         <div ng-if="data[id][0] != 'html'">
