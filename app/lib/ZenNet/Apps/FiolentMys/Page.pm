@@ -32,7 +32,6 @@ sub open {
                     } elsif(defined($type) && defined($id)) {
                         if($line =~ m/^<!--\/block-->$/) {
                             eval{ $data = decode_utf8($data) };
-                            $data = encode_utf8($data);
 
                             if($type eq 'gallery') {
                                 eval{ $data = [map({$_->{href}} @{XMLin($data, ForceArray => 1)->{a}})] };
