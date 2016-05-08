@@ -1,0 +1,26 @@
+<div>
+    <div>
+        <span>Добавить вверху:</span>
+        <input type="button" value="галлерею" ng-click="add_block('gallery', undefined, '')" />
+        <input type="button" value="html" ng-click="add_block('html', undefined, '')" />
+    </div>
+    <div class="block" ng-repeat="id in blocks">
+        <div ng-if="data[id][0] == 'gallery'">
+            <!-- TODO -->
+            <textarea style="width:800px;height:600px;" ng-model="data[id][1]"></textarea>
+        </div>
+        <div ng-if="data[id][0] != 'gallery'">
+            <textarea ng-model="data[id][1]" class="richarea"></textarea>
+        </div>
+        <div>
+            <span>Добавить после блока:</span>
+            <input type="button" value="галлерею" ng-click="add_block('gallery', $index, '')" />
+            <input type="button" value="html" ng-click="add_block('html', $index, '')" />
+            <br />
+            <input type="button" value="Удалить блок" ng-click="remove_block($index)" />
+        </div>
+    </div>
+    <div>
+        <input type="button" value="Сохранить страницу" ng-click="save()" />
+    </div>
+</div>
