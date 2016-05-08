@@ -85,13 +85,9 @@ sub save {
 
     if(open(my $fh, '>', $tmp_path)) {
         if(flock($fh, 2)) {
-            my $id = undef;
-            my $type = undef;
-            my $data = '';
-
             $fh->print(sprintf('<!--# include file="%s" -->' . "\n", $header));
 
-            while(defined(my $node = shift(@data))) {
+            while(defined(my $node = shift(@$data))) {
                 $fh->print(sprintf('<!--block%d:%s-->' . "\n", @$node[1, 0]));
 
                 if($node->[0] eq 'gallery') {
@@ -106,7 +102,7 @@ sub save {
                     $fh->print('</div>' . "\n");
 
                 } else {
-                    $fh->print($data . "\n");
+                    $fh->print($node->[2] . "\n");
                 }
 
                 $fh->print('<!--/block-->' . "\n");
