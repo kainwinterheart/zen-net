@@ -1,11 +1,14 @@
 <file-upload class="btn btn-success btn-rad btn-trans file-upload" name="file" multiple="true" uri="/app/fiolentmys/upload" accept="">
     <i class="fa fa-upload"></i>
     <span>Upload Files</span>
-    <ul>
-        <li ng-repeat="p in __userFiles" ng-hide="p.percent == 100">
+    <ul style="margin:0px;">
+        <li ng-repeat="p in __userFiles">
             <small>{{ p.name }}</small>
-            <div class="progress">
+            <div class="progress" ng-hide="p.percent == 100">
                 <div class="progress-bar" style="width: {{ p.percent }}%;"></div>
+            </div>
+            <div ng-hide="p.percent != 100">
+                {{ p.status.response }}
             </div>
         </li>
     </ul>
