@@ -13,7 +13,7 @@ sub error {
 
 sub check_app_rights {
     my ($self, $app, $action) = @_;
-    load my $pkg = "ZenNet::Apps::${App}";
+    load my $pkg = "ZenNet::Apps::${app}";
     my $method = "${pkg}::can_user";
 
     return (\&$method)->($self, $action);
