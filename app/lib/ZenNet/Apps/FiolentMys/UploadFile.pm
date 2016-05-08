@@ -4,17 +4,27 @@ use Mojo::Base 'ZenNet::Apps::FiolentMys';
 
 use File::Spec ();
 use Digest::MD5 'md5_hex';
+use Salvation::TC ();
 
 sub upload {
     my $self = shift;
     my $file = $self->param('file');
-    my $max_upload_size = $self->zapp_config('max_upload_size');
+    my $max_upload_size = $self->zapp_config->{max_upload_size};
+    Salvation::TC->assert($max_upload_size, 'Int');
 
     if($file->size > $max_upload_size) {
         $self->res->code(500);
 
         return $self->render(json => {
             error => 'File is too big',
+        });
+    }
+
+    if($file->size <= 0) {
+        $self->res->code(500);
+
+        return $self->render(json => {
+            error => 'Invalid file size',
         });
     }
 
@@ -46,7 +56,7 @@ sub upload {
     $path = join('/', grep({ length($_) > 0 } File::Spec->splitdir($path)));
 
     return $self->render(json => {
-        url => sprintf('https://%s/%s', $self->req->url->to_abs->host, $path),
+        url => sprintf('https://%s/%s', $self->zapp_config->{host}, $path),
     });
 }
 

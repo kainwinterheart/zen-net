@@ -181,7 +181,8 @@ angular.module('zenNetAppsFiolentMysApp', ['ui.bootstrap', 'ui-notification', 'z
     });
 })
 
-.controller('FiolentMysUploadFile', function() {
+.controller('FiolentMysUploadFile', function($scope) {
+    $scope.__userFiles = [];
 })
 
 ;
