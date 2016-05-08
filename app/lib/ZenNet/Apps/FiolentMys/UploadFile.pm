@@ -46,6 +46,7 @@ sub upload {
         $name =~ s/^.*\///;
         $name =~ s/^.*\\//;
         $name =~ s/\0//g;
+        $name =~ s/\s+/ /g;
 
         File::Spec->catfile($path, "${md5}-${name}");
     };

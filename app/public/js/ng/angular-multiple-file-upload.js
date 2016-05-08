@@ -59,7 +59,7 @@ angular.module('fileUpload',[])
                         list.push(uploadFile(f,uri,i));
                     }
 
-                    e.srcElement.files = [];
+                    //e.srcElement.files = [];
                     e.srcElement.value = '';
 
                     scope.__userFiles = list;
