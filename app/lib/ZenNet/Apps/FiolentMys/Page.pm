@@ -42,6 +42,7 @@ sub open {
 
                             undef($id);
                             undef($type);
+                            $data = '';
 
                         } else {
                             $data .= $line;
