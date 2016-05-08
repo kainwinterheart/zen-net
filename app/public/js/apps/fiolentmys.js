@@ -74,8 +74,13 @@ angular.module('zenNetAppsFiolentMysApp', ['ui.bootstrap', 'ui-notification', 'z
         ;
     }, 60000);
 
+    var fixer = $interval(function() {
+        tinymce.init({selector: '.richarea'});
+    }, 500);
+
     $scope.$on('$destroy', function() {
         $interval.cancel(pinger);
+        $interval.cancel(fixer);
     });
 
     $scope.serial = 0;
