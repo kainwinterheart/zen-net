@@ -6,7 +6,8 @@ use utf8;
 use boolean;
 
 use JSON 'decode_json';
-use Encode 'decode_utf8';
+use Encode (); sub decode_utf8 { return (eval{ Encode::decode_utf8($_[0]); } // $_[0]); }
+               sub encode_utf8 { return (eval{ Encode::encode_utf8(decode_utf8($_[0])); } // $_[0]); }
 use DateTime ();
 use MongoDB::OID ();
 use Salvation::TC ();
@@ -355,7 +356,7 @@ sub get_tags {
 
     if( length( $tags ) > 0 ) {
 
-        $tags = eval{ decode_json( $tags ) };
+        $tags = eval{ decode_json(encode_utf8($tags)) };
 
         if( $@ || ! Salvation::TC -> is( $tags, 'BlogPostTagsTree' ) ) {
 
