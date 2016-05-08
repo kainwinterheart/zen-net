@@ -5,7 +5,7 @@ use Mojo::Base 'ZenNet::BaseController';
 sub user_must_can {
     my ($self, $action) = @_;
 
-    unless($user->can_user($action)) {
+    unless($self->can_user($action)) {
         die("User must can ${action}");
     }
 
